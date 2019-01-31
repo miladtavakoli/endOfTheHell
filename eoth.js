@@ -58,9 +58,9 @@ function eoth() {
         doneMonth = doneMonth + 12;
         doneYear--;
     }
-    var doneDay = toDay;
-    doneDay += toMonth * 30;
-    doneDay += toYear * 360;
+    var doneDay = doneDay;
+    doneDay = doneDay + doneMonth * 30;
+    doneDay = doneDay + doneYear * 360;
     // var doneMonth = doneDay / 30;
     var DoneWeek = doneDay / 7;
 
