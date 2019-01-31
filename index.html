@@ -269,13 +269,14 @@
         resultDay += reMonth*30;
         resultDay += reYear*360;
 
+        var resultMonth= resultDay / 30;
+        var resultWeek= resultDay / 7;
 
         document.getElementById("result").innerHTML =
-            eDay + " \\\ " + eMonth + " \\\ " + eYear +
-            "<br>" + tDay + " \\\ " + tMonth + " \\\ " + tYear+
-            "<br>" + reDay + " \\\ " + reMonth + " \\\ " + reYear+
-            "<br>" + jDay + " \\\ " + jMonth + " \\\ " + jYear+
-            "<br>" +   " تعداد روز تا ترخیص" + "   &nbsp; :   &nbsp;" +  resultDay;
+//            "<br>" + jDay + " \\\ " + jMonth + " \\\ " + jYear+
+            "<br>" +   " تعداد روز تا ترخیص" + "   &nbsp; :   &nbsp;" +  resultDay +
+            "<br>" +   " تعداد ماه تا ترخیص" + "   &nbsp; :   &nbsp;" +  resultMonth.toFixed(1) +
+            "<br>" +   " تعداد هفته تا ترخیص" + "   &nbsp; :   &nbsp;" +  resultWeek.toFixed(1);
             ;
     }
 </script>
