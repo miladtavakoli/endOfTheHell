@@ -43,7 +43,7 @@
         }
 
         .h1 {
-            padding:;: 3 px;
+            padding: 3px;
             font-size: 22px;
             color: #ffffff;
             border-bottom: solid gray 3px;
@@ -117,7 +117,7 @@
                 </span>
                 <span class="col-sm-3 col-md-3 col-lg-3" style="margin:5px 3px;">
                     <select class="custom-select col-md-12" name="tYear" id="eYear">
-                        <option value="1390">1390</option>
+                  <option value="1390">1390</option>
                         <option value="1391">1391</option>
                         <option value="1392">1392</option>
                         <option value="1393">1393</option>
@@ -127,6 +127,16 @@
                         <option value="1397">1397</option>
                         <option value="1398">1398</option>
                         <option value="1399">1399</option>
+                        <option value="1400">1400</option>
+                        <option value="1401">1401</option>
+                        <option value="1402">1402</option>
+                        <option value="1403">1403</option>
+                        <option value="1404">1404</option>
+                        <option value="1405">1405</option>
+                        <option value="1406">1406</option>
+                        <option value="1407">1407</option>
+                        <option value="1408">1408</option>
+                        <option value="1409">1409</option>
                     </select>
                     <br>
                 </span>
@@ -196,15 +206,25 @@
                 <span class="col-sm-3 col-md-3 col-lg-3" style="margin:5px 3px;">
                     <select class="custom-select col-md-12 " name="tYear" id="tYear">
                         <option value="1390">1390</option>
-                        <option value="1391">1391</option>
-                        <option value="1392">1392</option>
-                        <option value="1393">1393</option>
-                        <option value="1394">1394</option>
-                        <option value="1395">1395</option>
-                        <option value="1396">1396</option>
-                        <option value="1397">1397</option>
-                        <option value="1398">1398</option>
-                        <option value="1399">1399</option>
+                            <option value="1391">1391</option>
+                            <option value="1392">1392</option>
+                            <option value="1393">1393</option>
+                            <option value="1394">1394</option>
+                            <option value="1395">1395</option>
+                            <option value="1396">1396</option>
+                            <option value="1397">1397</option>
+                            <option value="1398">1398</option>
+                            <option value="1399">1399</option>
+                            <option value="1400">1400</option>
+                            <option value="1401">1401</option>
+                            <option value="1402">1402</option>
+                            <option value="1403">1403</option>
+                            <option value="1404">1404</option>
+                            <option value="1405">1405</option>
+                            <option value="1406">1406</option>
+                            <option value="1407">1407</option>
+                            <option value="1408">1408</option>
+                            <option value="1409">1409</option>
                     </select>
                 </span>
             </div>
@@ -226,59 +246,7 @@
     </div>
 </div>
 <script src="tojalali.js"></script>
-<script>
-
-    function eoth() {
-        //add css to result Id
-        document.getElementById('result').classList.add('alert-info');
-
-        //Get Now Date
-        var today = new Date();
-        var gd = today.getDate();
-        var gm = today.getMonth() + 1; //January is 0!
-        var gy = today.getFullYear();
-        //
-        var tarikh=[];
-        tarikh= gregorian_to_jalali(gy,gm,gd);
-        var jYear=tarikh[0];
-        var jMonth=tarikh[1];
-        var jDay=tarikh[2];
-        // Ezam :(
-        var eDay = parseInt(document.getElementById("eDay").value);
-        var eMonth = parseInt(document.getElementById("eMonth").value);
-        var eYear = parseInt(document.getElementById("eYear").value);
-        //Tarkhis :D
-        var tDay = parseInt(document.getElementById("tDay").value);
-        var tMonth = parseInt(document.getElementById("tMonth").value);
-        var tYear = parseInt(document.getElementById("tYear").value);
-        var reDay = 0;
-        var reMonth = 0;
-        var reYear = 0;
-        reDay = tDay -jDay;
-        reMonth = tMonth - jMonth;
-        reYear = tYear - jYear;
-        if (reDay < 0) {
-            reDay = reDay + 30;
-            reMonth--;
-        }
-        if(reMonth<0){
-            reMonth = reMonth +12;
-            reYear--;
-        }
-        var resultDay = reDay;
-        resultDay += reMonth*30;
-        resultDay += reYear*360;
-
-        var resultMonth= resultDay / 30;
-        var resultWeek= resultDay / 7;
-
-        document.getElementById("result").innerHTML =
-//            "<br>" + jDay + " \\\ " + jMonth + " \\\ " + jYear+
-            "<br>" +   " تعداد روز تا ترخیص" + "   &nbsp; :   &nbsp;" +  resultDay +
-            "<br>" +   " تعداد ماه تا ترخیص" + "   &nbsp; :   &nbsp;" +  resultMonth.toFixed(1) +
-            "<br>" +   " تعداد هفته تا ترخیص" + "   &nbsp; :   &nbsp;" +  resultWeek.toFixed(1);
-            ;
-    }
+<script src="eoth.js">
 </script>
 </body>
 </html>
