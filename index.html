@@ -12,7 +12,7 @@
             margin: 0;
             font: 400 15px/1.8 "Lato", sans-serif;
             color: rgb(214, 130, 130);
-            overflow: hidden;
+            overflow-x: hidden;
 
         }
 
@@ -27,12 +27,9 @@
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
-
-        }
-
-        .bgimg-1 {
             background-image: url("tower.jpg");
-            height: 100%;
+            min-height: 100%;
+
         }
 
         .txts {
@@ -47,7 +44,13 @@
             font-size: 22px;
             color: #ffffff;
             border-bottom: solid gray 3px;
-
+        }
+        .cp{
+            position: absolute;
+            bottom: 5px;
+            left: 5px;
+            color: gray;
+            font-size: 60%;
         }
 
     </style>
@@ -58,12 +61,12 @@
     <h1 class="h1 text-center"> روز شمار پایان خدمت</h1>
 
     <div class="row  justify-content-center bgw">
-        <div class="col-sm-offset-12  col-md-5 col-lg-offset-5" style="margin:5px 30px;">
+        <div class="col-sm-offset-12  col-md-8 col-lg-offset-8" style="margin:5px 30px;">
             <span class="text-right txts" style="margin:0 30px 40px 30px;">تاریخ اعزام </span>
             <br>
             <div class="row">
                 <span class="col-sm-3 col-md-3 col-lg-3" style="margin:5px 3px;">
-                    <select class="custom-select col-md-12" id="eDay">
+                    <select class="custom-select " id="eDay">
                         <option value="0" selected disabled hidden>روز</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -97,11 +100,10 @@
                         <option value="30">30</option>
                         <option value="31">31</option>
                     </select>
-                    <br>
                 </span>
                 <span class="col-sm-3 col-md-3 col-lg-3" style="margin:5px 3px;">
-                    <select class="custom-select col-md-12 " name="tMonth" id="eMonth">
-<option value="0" selected disabled hidden>ماه</option>
+                    <select class="custom-select " name="tMonth" id="eMonth">
+                        <option value="0" selected disabled hidden>ماه</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -115,10 +117,10 @@
                         <option value="11">11</option>
                         <option value="12">12</option>
                     </select>
-                    <br>
+
                 </span>
                 <span class="col-sm-3 col-md-3 col-lg-3" style="margin:5px 3px;">
-                    <select class="custom-select col-md-12" name="tYear" id="eYear">
+                    <select class="custom-select " name="tYear" id="eYear">
                         <option value="0" selected disabled hidden>سال</option>
                          <option value="1390">1390</option>
                         <option value="1391">1391</option>
@@ -141,7 +143,6 @@
                         <option value="1408">1408</option>
                         <option value="1409">1409</option>
                     </select>
-                    <br>
                 </span>
             </div>
         </div>
@@ -149,9 +150,9 @@
 
 
     <div class="row  justify-content-center">
-        <div class="col-sm-offset-9  col-md-5 col-lg-offset-5" style="margin:5px 30px;">
+        <div class="col-sm-offset-9  col-md-8 col-lg-offset-8" style="margin:5px 30px;">
             <span class="text-right txts " style="margin:0 30px 40px 30px;">تاریخ ترخیص </span>
-            <br>
+
             <div class="row">
                 <span class="col-sm-3 col-md-3 col-lg-3" style="margin:5px 3px;">
                     <select class="custom-select col-md-12" name="tDay" id="tDay">
@@ -236,21 +237,23 @@
             </div>
         </div>
     </div>
-    <br>
 
-    <div class="row justify-content-center">
-        <div class=" col-3 col-md-3 col-lg-3 ">
-            <button type="button" class="btn btn-primary btn-lg" style="margin:auto;" onclick="eoth()">حساب کن</button>
+    <div class="row">
+        <div class=" col-3 col-md-3 col-lg-3 " style="margin: auto">
+            <button type="button" class="btn btn-primary " style="margin:auto;" onclick="eoth()">حساب کن</button>
         </div>
     </div>
 
-    <br>
+
     <div class="row justify-content-center">
-        <div class="col-sm-offset-9  col-md-5 col-lg-offset-5  " style="margin:5px 30px;" id="result">
+        <div class="col-sm-offset-9  col-md-5 col-lg-offset-5  border-dark  " style="margin:5px 30px;" id="result">
             &nbsp;
         </div>
     </div>
+    <div class="cp" > Milad Tavakoli
+    </div>
 </div>
+
 <script src="tojalali.js"></script>
 <script src="eoth.js">
 </script>
