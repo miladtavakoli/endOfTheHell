@@ -1,7 +1,6 @@
 
 function eoth() {
     //add css to result Id
-    document.getElementById('result').classList.add('alert-info');
 
     //Get Now Date
     var today = new Date();
@@ -42,11 +41,16 @@ function eoth() {
 
     var resultMonth = resultDay / 30;
     var resultWeek = resultDay / 7;
+if(resultDay>0) {
+    document.getElementById('result').classList.add('alert-info');
 
     document.getElementById("result").innerHTML =
 //            "<br>" + jDay + " \\\ " + jMonth + " \\\ " + jYear+
         "<br>" + " تعداد روز تا ترخیص" + "   &nbsp; :   &nbsp;" + resultDay +
         "<br>" + " تعداد ماه تا ترخیص" + "   &nbsp; :   &nbsp;" + resultMonth.toFixed(1) +
         "<br>" + " تعداد هفته تا ترخیص" + "   &nbsp; :   &nbsp;" + resultWeek.toFixed(1);
-    ;
+}
+else{
+    alert('موتور توی وارد کردن تاریخ دقت کن!');
+}
 }
