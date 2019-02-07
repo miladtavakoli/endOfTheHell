@@ -26,6 +26,17 @@
     <meta name="theme-color" content="">
 
     <style>
+        @font-face {
+            font-family: Vazir;
+            src: url('font/Vazir.eot');
+            src: url('font/Vazir.eot?#iefix') format('embedded-opentype'),
+            url('font/Vazir.woff2') format('woff2'),
+            url('font/Vazir.woff') format('woff'),
+            url('font/Vazir.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
         body, html {
             height: 100%;
             margin: 0;
@@ -71,13 +82,19 @@
             color: gray;
             font-size: 60%;
         }
+        .sm-txt{
+            margin-right: 20px;
+            padding:2px 10px;
+            color: #fff;
+            font-size: 14px;
+        }
 
     </style>
-    <title>روزشمار پایان خدمت</title>
+    <title>روزشمار سربازی</title>
 </head>
 <body cz-shortcut-listen="true" class="content-fluid">
 <div class="bgimg-1">
-    <h1 class="h1 text-center"> روز شمار پایان خدمت</h1>
+    <h1 class="h1 text-center">روزشمار سربازی</h1>
 
     <div class="row  justify-content-center bgw">
         <div class="col-sm-offset-12  col-md-8 col-lg-offset-8" style="margin:5px 30px;">
@@ -170,7 +187,15 @@
 
     <div class="row  justify-content-center">
         <div class="col-sm-offset-9  col-md-8 col-lg-offset-8" style="margin:5px 30px;">
-            <span class="text-right txts " style="margin:0 30px 40px 30px;">تاریخ ترخیص </span>
+            <span>
+            <span class="text-right txts " style="margin:0 30px 40px 30px;">تاریخ ترخیص
+            <br>
+            </span>
+                <span class="sm-txt" >
+                  درصورت وارد نکردن تاریخ ترخیص خدمت  ۲۱ ماهه حساب میشه
+                </span>
+            </span>
+
 
             <div class="row">
                 <span class="col-sm-3 col-md-3 col-lg-3" style="margin:5px 3px;">
@@ -265,7 +290,7 @@
 
 
     <div class="row justify-content-center">
-        <div class="col-sm-offset-9  col-md-5 col-lg-offset-5  border-dark  " style="margin:5px 30px;" id="result">
+        <div class="col-sm-offset-9  col-md-5 col-lg-offset-5  border-dark text-center  " style="margin:5px 30px;" id="result">
             &nbsp;
         </div>
     </div>

@@ -1,4 +1,3 @@
-
 function eoth() {
 
     //Get Now Date
@@ -23,12 +22,10 @@ function eoth() {
     var tMonth = parseInt(document.getElementById("tMonth").value);
     var tYear = parseInt(document.getElementById("tYear").value);
 
-    var toDay = 0;
-    var toMonth = 0;
-    var toYear = 0;
-    toDay = tDay - jDay;
-    toMonth = tMonth - jMonth;
-    toYear = tYear - jYear;
+
+    var toDay = tDay - jDay;
+    var toMonth = tMonth - jMonth;
+    var toYear = tYear - jYear;
     if (toDay < 0) {
         toDay = toDay + 30;
         toMonth--;
@@ -37,19 +34,16 @@ function eoth() {
         toMonth = toMonth + 12;
         toYear--;
     }
-    var toDay = toDay;
-    toDay += toMonth * 30;
-    toDay += toYear * 360;
-    var toMonth = toDay / 30;
-    var toWeek = toDay / 7;
+    var leftDay = toDay;
+    leftDay += toMonth * 30;
+    leftDay += toYear * 360;
+    var leftMonth = leftDay / 30;
+    var leftWeek = leftDay / 7;
 
 
-    var doneDay = 0;
-    var doneMonth = 0;
-    var doneYear = 0;
-    doneDay = jDay -eDay;
-    doneMonth = jMonth - eMonth;
-    doneYear = jYear - eYear;
+    var doneDay = jDay - eDay;
+    var doneMonth = jMonth - eMonth;
+    var doneYear = jYear - eYear;
     if (doneDay < 0) {
         doneDay = doneDay + 30;
         doneMonth--;
@@ -58,27 +52,29 @@ function eoth() {
         doneMonth = doneMonth + 12;
         doneYear--;
     }
-    var doneDay = doneDay;
-    doneDay = doneDay + doneMonth * 30;
-    doneDay = doneDay + doneYear * 360;
-    // var doneMonth = doneDay / 30;
-    var DoneWeek = doneDay / 7;
+    var goneDay = doneDay;
+    goneDay = goneDay + doneMonth * 30;
+    goneDay = goneDay + doneYear * 360;
+    var goneWeek = goneDay / 7;
 
 
-
-if(toDay>0) {
-    //add css to Done Id
-    document.getElementById('result').classList.add('alert-secondary','border');
-    //print in Done div
-    document.getElementById("result").innerHTML =
+    if (leftDay >= 0 && goneDay >= 0) {
+        //add css to Done Id
+        document.getElementById('result').classList.add('alert-secondary', 'border');
+        //print in result div
+        document.getElementById("result").innerHTML =
 //            "<br>" + jDay + " \\\ " + jMonth + " \\\ " + jYear+
-         "  روز خدمت کرده " + "   &nbsp; :   &nbsp;" + doneDay +
-        "<br>" + "  هفته خدمت کرده " + "   &nbsp; :   &nbsp;" + DoneWeek.toFixed(1) +
-        "<br>" + "  روز تا ترخیص" + "   &nbsp; :   &nbsp;" + toDay +
-        "<br>" + "  ماه تا ترخیص" + "   &nbsp; :   &nbsp;" + toMonth.toFixed(1) +
-        "<br>" + "  هفته تا ترخیص" + "   &nbsp; :   &nbsp;" + toWeek.toFixed(1);
-}
-else{
-    alert('موتور توی وارد کردن تاریخ دقت کن!');
-}
+            "  روز خدمت کرده " + "   &emsp; :   &emsp;" + goneDay +
+            "<br>" + "  هفته خدمت کرده " + "   &emsp; :   &emsp;" + goneWeek.toFixed(1) +
+            "<br>" + "  روز تا ترخیص" + "   &emsp; :   &emsp;" + leftDay +
+            "<br>" + "  ماه تا ترخیص" + "   &emsp; :   &emsp;" + leftMonth.toFixed(1) +
+            "<br>" + "  هفته تا ترخیص" + "   &emsp; :   &emsp;" + leftWeek.toFixed(1);
+    }
+    else {
+        //Add Css
+        //print in result div
+        document.getElementById('result').classList.add('alert-warning', 'border');
+        document.getElementById("result").innerHTML =
+            "پست دادن خسته‌ات کرده؟ توی واردکردن تاریخ دقت کن";
+    }
 }
