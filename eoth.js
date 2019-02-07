@@ -21,8 +21,21 @@ function eoth() {
     var tDay = parseInt(document.getElementById("tDay").value);
     var tMonth = parseInt(document.getElementById("tMonth").value);
     var tYear = parseInt(document.getElementById("tYear").value);
-
-
+    var t = tDay == 0 && tMonth == 0 && tYear == 0;
+    if (t) {
+        //if exit day (tarkhis) dont enter
+        tDay = eDay;
+        tMonth = eMonth + 9;
+        tYear = eYear + 1;
+        if (tMonth > 12) {
+            tMonth -= 12;
+            tYear++;
+        }
+        var tarkhis = "  تاریخ ترخیص " + "   &emsp; :   &emsp;" + tDay + " \\\ " + tMonth + " \\\ " + tYear + "<br>";
+    }
+    else {
+        tarkhis = "";
+    }
     var toDay = tDay - jDay;
     var toMonth = tMonth - jMonth;
     var toYear = tYear - jYear;
@@ -57,13 +70,17 @@ function eoth() {
     goneDay = goneDay + doneYear * 360;
     var goneWeek = goneDay / 7;
 
-
+    var resultCss = document.getElementById('result').classList
     if (leftDay >= 0 && goneDay >= 0) {
         //add css to Done Id
-        document.getElementById('result').classList.add('alert-secondary', 'border');
+        console.log(resultCss);
+        if (resultCss.contains("alert-warning")){
+            resultCss.remove("alert-warning");
+        }
+        resultCss.add('alert-secondary', 'border');
         //print in result div
         document.getElementById("result").innerHTML =
-//            "<br>" + jDay + " \\\ " + jMonth + " \\\ " + jYear+
+            tarkhis +
             "  روز خدمت کرده " + "   &emsp; :   &emsp;" + goneDay +
             "<br>" + "  هفته خدمت کرده " + "   &emsp; :   &emsp;" + goneWeek.toFixed(1) +
             "<br>" + "  روز تا ترخیص" + "   &emsp; :   &emsp;" + leftDay +
@@ -73,7 +90,10 @@ function eoth() {
     else {
         //Add Css
         //print in result div
-        document.getElementById('result').classList.add('alert-warning', 'border');
+        if (resultCss.contains("alert-secondary")){
+            resultCss.remove("alert-secondary");
+        }
+        resultCss.add('alert-warning', 'border');
         document.getElementById("result").innerHTML =
             "پست دادن خسته‌ات کرده؟ توی واردکردن تاریخ دقت کن";
     }
