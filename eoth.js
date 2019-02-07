@@ -70,10 +70,9 @@ function eoth() {
     goneDay = goneDay + doneYear * 360;
     var goneWeek = goneDay / 7;
 
-    var resultCss = document.getElementById('result').classList
+    var resultCss = document.getElementById('result').classList;
     if (leftDay >= 0 && goneDay >= 0) {
         //add css to Done Id
-        console.log(resultCss);
         if (resultCss.contains("alert-warning")){
             resultCss.remove("alert-warning");
         }
