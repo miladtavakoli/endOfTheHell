@@ -1,6 +1,4 @@
 function eoth2() {
-
-
     var exitMiladi;
     var startMiladi;
     var nowDate = new Date();
