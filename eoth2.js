@@ -3,11 +3,13 @@
 function eoth2() {
 
 
-    var exitMiladi = [];
-    var startMiladi = [];
+    var exitMiladi;
+    var startMiladi;
     var nowDate = new Date();
     var exitMiladiDate = new Date();
     var startMiladiDate = new Date();
+    var htmlRemainDays, htmlRemainWeeks, htmlRemainMonths, htmlRemainHours, htmlRemainMinutes, htmlRemainseconds = "";
+    var htmlLeftDays, htmlLeftWeeks, htmlLeftMonths, htmlLeftHours, htmlLeftMinutes, htmlLeftseconds = "";
 
     var resultCss = document.getElementById('result').classList;
 
@@ -34,48 +36,70 @@ function eoth2() {
     exitMiladiDate.setHours(0, 0, 0);
 
     var tarkhis = "";
-    console.log(exitMiladiDate, nowDate);
-    console.log(exitMiladiDate - nowDate);
+    // console.log(exitMiladiDate, nowDate);
+    // console.log(exitMiladiDate - nowDate);
+
+
 
     var remainDays = date_diff_indays(nowDate, exitMiladiDate);
-    var remainWeeks = date_diff_inWeeks(nowDate, exitMiladiDate);
-    var remainMonths = date_diff_inMonths(nowDate, exitMiladiDate);
-    var remainHours = date_diff_inHours(nowDate, exitMiladiDate);
-    var remainMinutes = date_diff_inMinutes(nowDate, exitMiladiDate);
-    var remainseconds = date_diff_inseconds(nowDate, exitMiladiDate);
+    if(remainDays >= 0 ) {
+        var remainWeeks = date_diff_inWeeks(nowDate, exitMiladiDate);
+        var remainMonths = date_diff_inMonths(nowDate, exitMiladiDate);
+        var remainHours = date_diff_inHours(nowDate, exitMiladiDate);
+        var remainMinutes = date_diff_inMinutes(nowDate, exitMiladiDate);
+        var remainseconds = date_diff_inseconds(nowDate, exitMiladiDate);
+            htmlRemainDays       =  "<br>" + "  روز تا ترخیص" + "   &emsp; :   &emsp;" + remainDays;
+            htmlRemainWeeks      =  "<br>" + "  هفته تا ترخیص" + "   &emsp; :   &emsp;" + remainWeeks;
+            htmlRemainMonths     =  "<br>" + "  ماه تا ترخیص" + "   &emsp; :   &emsp;" + remainMonths ;
+            htmlRemainHours      =  "<br>" + "  ساعت تا ترخیص" + "   &emsp; :   &emsp;" + remainHours ;
+            htmlRemainMinutes    =  "<br>" + "  دقیقه تا ترخیص" + "   &emsp; :   &emsp;" + remainMinutes;
+            htmlRemainseconds    =  "<br>" + "  ثانیه تا ترخیص" + "   &emsp; :   &emsp;" +remainseconds ;
+    }
 
     var leftDays = date_diff_indays(startMiladiDate ,nowDate);
-    var leftWeeks = date_diff_inWeeks(startMiladiDate ,nowDate);
-    var leftMonths = date_diff_inMonths(startMiladiDate ,nowDate);
-    var leftHours = date_diff_inHours(startMiladiDate ,nowDate);
-    var leftMinutes = date_diff_inMinutes(startMiladiDate ,nowDate);
-    var leftseconds = date_diff_inseconds(startMiladiDate ,nowDate);
+    if(leftDays>=0) {
+        var leftWeeks = date_diff_inWeeks(startMiladiDate, nowDate);
+        var leftMonths = date_diff_inMonths(startMiladiDate, nowDate);
+        var leftHours = date_diff_inHours(startMiladiDate, nowDate);
+        var leftMinutes = date_diff_inMinutes(startMiladiDate, nowDate);
+        var leftseconds = date_diff_inseconds(startMiladiDate, nowDate);
+        htmlLeftDays       =  "<br>" + "  روز گذشته از اعزام" + "   &emsp; :   &emsp;" + leftDays;
+        htmlLeftWeeks      =  "<br>" + "  هفته گذشته از اعزام" + "   &emsp; :   &emsp;" + leftWeeks;
+        htmlLeftMonths     =  "<br>" + "  ماه گذشته از اعزام" + "   &emsp; :   &emsp;" + leftMonths ;
+        htmlLeftHours      =  "<br>" + "  ساعت گذشته از اعزام" + "   &emsp; :   &emsp;" + leftHours ;
+        htmlLeftMinutes    =  "<br>" + "  دقیقه گذشته از اعزام" + "   &emsp; :   &emsp;" + leftMinutes;
+        htmlLeftseconds    =  "<br>" + "  ثانیه گذشته از اعزام" + "   &emsp; :   &emsp;" +leftseconds ;
+
+
+    }
+    //print in result div
+    if (leftDays >= 0 && remainDays >= 0) {
+        //add css to Done Id
+        if (resultCss.contains("alert-warning")) {
+            resultCss.remove("alert-warning");
+        }
+
 
     resultCss.add('alert-secondary', 'border');
-    //print in result div
-
     document.getElementById("result").innerHTML =
         tarkhis +
-        // "  روز خدمت کرده " + "   &emsp; :   &emsp;" + goneDay +
-        // "<br>" + "  هفته خدمت کرده " + "   &emsp; :   &emsp;" + goneWeek.toFixed(1) +
+    htmlLeftDays+ htmlLeftWeeks+ htmlLeftMonths+ htmlLeftHours+ htmlLeftMinutes+ htmlLeftseconds +
 
+    "<br>" +"<br>" +
 
+        htmlRemainDays + htmlRemainWeeks +htmlRemainMonths + htmlRemainHours +htmlRemainMinutes + htmlRemainseconds ;
 
-        "<br>" + "  روز گذشته از خدمت" + "   &emsp; :   &emsp;" + leftDays +
-        "<br>" + "  هفته گذشته از خدمت" + "   &emsp; :   &emsp;" + leftWeeks +
-        "<br>" + "  ماه گذشته از خدمت" + "   &emsp; :   &emsp;" + leftMonths +
-        "<br>" + "  ساعت گذشته از خدمت" + "   &emsp; :   &emsp;" + leftHours +
-        "<br>" + "  دقیقه گذشته از خدمت" + "   &emsp; :   &emsp;" + leftMinutes +
-        "<br>" + "  ثانیه گذشته از خدمت" + "   &emsp; :   &emsp;" +leftseconds +
-        "<br>" +"<br>" +"<br>" +
-
-        "<br>" + "  روز تا ترخیص" + "   &emsp; :   &emsp;" + remainDays +
-        "<br>" + "  هفته تا ترخیص" + "   &emsp; :   &emsp;" + remainWeeks +
-        "<br>" + "  ماه تا ترخیص" + "   &emsp; :   &emsp;" + remainMonths +
-        "<br>" + "  ساعت تا ترخیص" + "   &emsp; :   &emsp;" + remainHours +
-        "<br>" + "  دقیقه تا ترخیص" + "   &emsp; :   &emsp;" + remainMinutes +
-        "<br>" + "  ثانیه تا ترخیص" + "   &emsp; :   &emsp;" +remainseconds ;
-
+    }
+    else {
+        //Add Css
+        //print in result div
+        if (resultCss.contains("alert-secondary")){
+            resultCss.remove("alert-secondary");
+        }
+        resultCss.add('alert-warning', 'border');
+        document.getElementById("result").innerHTML =
+            "پست دادن خسته‌ات کرده؟ توی واردکردن تاریخ دقت کن";
+    }
 }
 
 
