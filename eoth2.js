@@ -22,7 +22,6 @@ function eoth2() {
     startMiladiDate.setYear(startMiladi[0]);
     startMiladiDate.setHours(0, 0, 0);
 
-    console.log(startMiladiDate , nowDate);
     //get Exit Date
     var exitDay = parseInt(document.getElementById("tDay").value);
     var exitMonth = parseInt(document.getElementById("tMonth").value);
