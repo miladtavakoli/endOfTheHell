@@ -4,39 +4,83 @@ function eoth2() {
     var nowDate = new Date();
     var exitMiladiDate = new Date();
     var startMiladiDate = new Date();
-    var tarkhis="";
+    var tarkhis = "";
     var htmlRemainDays, htmlRemainWeeks, htmlRemainMonths, htmlRemainHours, htmlRemainMinutes, htmlRemainseconds = "";
     var htmlLeftDays, htmlLeftWeeks, htmlLeftMonths, htmlLeftHours, htmlLeftMinutes, htmlLeftseconds = "";
 
     var resultCss = document.getElementById('result').classList;
 
     //get Start Date
-    var startDay = parseInt(document.getElementById("eDay").value);
-    var startMonth = parseInt(document.getElementById("eMonth").value);
-    var startYear = parseInt(document.getElementById("eYear").value);
+    var startDay = parseInt(document.getElementById("startDay").value);
+    var startMonth = parseInt(document.getElementById("startMonth").value);
+    var startYear = parseInt(document.getElementById("startYear").value);
     startMiladi = jalali_to_gregorian(startYear, startMonth, startDay);
     startMiladiDate.setDate(startMiladi[2]);
     startMiladiDate.setMonth(startMiladi[1] - 1);
     startMiladiDate.setYear(startMiladi[0]);
     startMiladiDate.setHours(0, 0, 0);
 
-    //get Exit Date
-    var exitDay = parseInt(document.getElementById("tDay").value);
-    var exitMonth = parseInt(document.getElementById("tMonth").value);
-    var exitYear = parseInt(document.getElementById("tYear").value);
-    var exit = exitYear ==0 && exitMonth==0 && exitDay==0;
-    if (exit) {
-        //if exit day (tarkhis) dont enter
-        exitDay = startDay;
-        exitMonth = startMonth + 9;
-        exitYear = startYear + 1;
-        if (exitMonth > 12) {
-            exitMonth -= 12;
-            exitYear++;
-        }
-        var tarkhis = "  تاریخ ترخیص " + "   &emsp; :   &emsp;" + exitDay + " \\\ " + exitMonth  + " \\\ " + exitYear + "<br>";
 
+
+    //get Description khedmat
+    var ezafe = 0;
+    var kasri = 0;
+    var ezafeInput = document.getElementById("ezafeKhedmat").value
+    var kasriInput = document.getElementById("kasriKhedmat").value
+    if (ezafeInput) ezafe = parseInt(ezafeInput);
+    if (kasriInput) kasri = parseInt(kasriInput);
+
+    var desc = parseInt(kasri - ezafe);
+    var descDay = 0;
+    var descMonth = 0;
+    var descYear = 0;
+    if (desc) {
+        var absDesc = Math.abs(desc);
+        descYear = Math.floor(absDesc / 360);
+        descMonth = Math.floor(absDesc % 360 / 30);
+        descDay = Math.floor(absDesc % 360 % 30);
+        console.log(" روز ", descDay, " ماه ", descMonth, " سال  ", descYear);
+        // console.log(desc);
+        if (desc < 0) {
+            descDay *= -1;
+            descMonth *= -1;
+            descYear *= -1;
+        }
     }
+
+
+
+    //calculate exit Day
+    var exitDay = startDay;
+    var exitMonth = startMonth;
+    var exitYear = startYear;
+
+    exitDay = exitDay - descDay;
+    if (exitDay < 1) {
+        exitDay += 30;
+        exitMonth--;
+    }
+    if (exitDay > 30) {
+        exitDay -= 30;
+        exitMonth++;
+    }
+
+    exitMonth = exitMonth - descMonth + 9;
+    if (exitMonth < 1) {
+        exitMonth += 12;
+        exitYear--;
+    }
+    if (exitMonth > 12) {
+        exitYear = Math.floor(exitYear + exitMonth / 12);
+        exitMonth = Math.floor(exitMonth % 12);
+        console.log(exitYear);
+    }
+
+    exitYear = exitYear - descYear + 1;
+
+    console.log(" روز ", exitDay, " ماه ", exitMonth, " سال  ", exitYear);
+
+    var tarkhis = "  تاریخ ترخیص " + "   &emsp; :   &emsp;" + exitDay + " \\\ " + exitMonth + " \\\ " + exitYear + "<br>";
 
 
     exitMiladi = jalali_to_gregorian(exitYear, exitMonth, exitDay);
@@ -64,8 +108,10 @@ function eoth2() {
         htmlRemainseconds = "<br>" + "  ثانیه تا ترخیص" + "   &emsp; :   &emsp;" + remainseconds;
     }
 
+
     var leftDays = date_diff_indays(startMiladiDate, nowDate);
     if (leftDays >= 0) {
+
         var leftWeeks = date_diff_inWeeks(startMiladiDate, nowDate);
         var leftMonths = date_diff_inMonths(startMiladiDate, nowDate);
         var leftHours = date_diff_inHours(startMiladiDate, nowDate);
@@ -78,7 +124,8 @@ function eoth2() {
         htmlLeftMinutes = "<br>" + "  دقیقه گذشته از اعزام" + "   &emsp; :   &emsp;" + leftMinutes;
         htmlLeftseconds = "<br>" + "  ثانیه گذشته از اعزام" + "   &emsp; :   &emsp;" + leftseconds;
     }
-    //print in result div
+
+    //print Result in result div
     if (leftDays >= 0 && remainDays >= 0) {
         //add css to Done Id
         if (resultCss.contains("alert-warning")) {
@@ -104,6 +151,8 @@ function eoth2() {
         document.getElementById("result").innerHTML =
             "پست دادن خسته‌ات کرده؟ توی واردکردن تاریخ دقت کن";
     }
+
+    // console.log(ezafe, "_--_", kasri, "_--_", exitMiladiDate, tarkhis);
 }
 
 

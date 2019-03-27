@@ -16,7 +16,7 @@
     <link rel="apple-touch-icon" sizes="144x144" href="IMG/apple-icon-144x144.png">
     <link rel="apple-touch-icon" sizes="152x152" href="IMG/apple-icon-152x152.png">
     <link rel="apple-touch-icon" sizes="180x180" href="IMG/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192"  href="IMG/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="IMG/android-icon-192x192.png">
     <link rel="icon" type="image/png" sizes="32x32" href="IMG/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="96x96" href="IMG/favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="16x16" href="IMG/favicon-16x16.png">
@@ -40,9 +40,10 @@
         body, html {
             height: 100%;
             margin: 0;
-            font: 400 15px/1.8 "Lato", sans-serif;
-            color: rgb(214, 130, 130);
+            font: 400 13px/1.8 Vazir, Vazir;
+            color: #fff3cd;
             overflow-x: hidden;
+
 
         }
 
@@ -73,21 +74,26 @@
             color: #ffffff;
             border-bottom: solid gray 3px;
         }
+
         .h5 {
             padding: 3px;
             font-size: 12px;
             color: #ffffff;
         }
-        .cp{
+
+        .cp {
             position: absolute;
             bottom: 5px;
             left: 5px;
             color: gray;
             font-size: 60%;
         }
-        .sm-txt{
+
+        .labels {
+            font-family: Vazir;
+            width: 100%;
             margin-right: 20px;
-            padding:2px 10px;
+            padding: 2px 10px;
             color: #fff;
             font-size: 14px;
         }
@@ -106,7 +112,7 @@
             <br>
             <div class="row">
                 <span class="col-sm-3 col-md-3 col-lg-3" style="margin:5px 3px;">
-                    <select class="custom-select " id="eDay">
+                    <select class="custom-select " id="startDay">
                         <option value="0" selected disabled hidden>روز</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -142,25 +148,25 @@
                     </select>
                 </span>
                 <span class="col-sm-3 col-md-3 col-lg-3" style="margin:5px 3px;">
-                    <select class="custom-select " name="tMonth" id="eMonth">
+                    <select class="custom-select "  id="startMonth">
                         <option value="0" selected disabled hidden>ماه</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
+                        <option value="1">فروردین</option>
+                        <option value="2">اردیبهشت</option>
+                        <option value="3">خرداد</option>
+                        <option value="4">تیر</option>
+                        <option value="5">مرداد</option>
+                        <option value="6">شهریور</option>
+                        <option value="7">مهر</option>
+                        <option value="8">آبان</option>
+                        <option value="9">آذر</option>
+                        <option value="10">دی</option>
+                        <option value="11">بهمن</option>
+                        <option value="12">اسفند</option>
                     </select>
 
                 </span>
                 <span class="col-sm-3 col-md-3 col-lg-3" style="margin:5px 3px;">
-                    <select class="custom-select " name="tYear" id="eYear">
+                    <select class="custom-select "  id="startYear">
                         <option value="0" selected disabled hidden>سال</option>
                          <option value="1390">1390</option>
                         <option value="1391">1391</option>
@@ -192,95 +198,28 @@
     <div class="row  justify-content-center">
         <div class="col-sm-offset-9  col-md-8 col-lg-offset-8" style="margin:5px 30px;">
             <span>
-            <span class="text-right txts " style="margin:0 30px 40px 30px;">تاریخ ترخیص
-            <br>
-            </span>
-                <span class="sm-txt" >درصورت وارد نکردن تاریخ ترخیص خدمت  ۲۱ ماهه حساب میشه
-                </span>
+            <span class="text-right txts " style="margin:0;"> اطلاعات خدمتی</span>
             </span>
 
 
             <div class="row">
-                <span class="col-sm-3 col-md-3 col-lg-3" style="margin:5px 3px;">
-                    <select class="custom-select col-md-12" name="tDay" id="tDay">
-                        <option value="0" >روز</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
-                        <option value="13">13</option>
-                        <option value="14">14</option>
-                        <option value="15">15</option>
-                        <option value="16">16</option>
-                        <option value="17">17</option>
-                        <option value="18">18</option>
-                        <option value="19">19</option>
-                        <option value="20">20</option>
-                        <option value="21">21</option>
-                        <option value="22">22</option>
-                        <option value="23">23</option>
-                        <option value="24">24</option>
-                        <option value="25">25</option>
-                        <option value="26">26</option>
-                        <option value="27">27</option>
-                        <option value="28">28</option>
-                        <option value="29">29</option>
-                        <option value="30">30</option>
-                        <option value="31">31</option>
-                    </select>
+                <span  class="col-sm-5 col-md-5 col-lg-5 align-content-center" style=" margin:5px 3px;   background-color: rgba(165,50,50,.2);">
+
+                     <label for="ezafeKhedmat" class="labels">:&nbsp;روز اضافه خدمت</label>
+                     <input type="number" class="form-control" id="ezafeKhedmat" aria-describedby="ezafe"
+                            placeholder="0">
+                    <small id="ezafe" class="form-text ">درصورت نداشتن اضافه خدمت خالی بذارید.*</small>
+
                 </span>
 
-                <span class="col-sm-3 col-md-3 col-lg-3" style="margin:5px 3px;">
-                    <select class="custom-select col-md-12 " name="tMonth" id="tMonth">
-                        <option value="0" >ماه</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
-                    </select>
+                <span class="col-sm-5 col-md-5 col-lg-5" style="margin:5px 3px;   background-color: rgba(0,100,2,.2);">
+
+                     <label for="kasriKhedmat" class="labels">:&nbsp;روز کسری خدمت</label>
+                     <input type="number" class="form-control" id="kasriKhedmat" aria-describedby="kasri"
+                            placeholder="0">
+                      <small id="kasri" class="form-text ">درصورت نداشتن کسری خدمت خالی بذارید.*</small>
                 </span>
 
-                <span class="col-sm-3 col-md-3 col-lg-3" style="margin:5px 3px;">
-                    <select class="custom-select col-md-12 " name="tYear" id="tYear">
-                          <option value="0" >سال</option>
-                            <option value="1390">1390</option>
-                            <option value="1391">1391</option>
-                            <option value="1392">1392</option>
-                            <option value="1393">1393</option>
-                            <option value="1394">1394</option>
-                            <option value="1395">1395</option>
-                            <option value="1396">1396</option>
-                            <option value="1397">1397</option>
-                            <option value="1398">1398</option>
-                            <option value="1399">1399</option>
-                            <option value="1400">1400</option>
-                            <option value="1401">1401</option>
-                            <option value="1402">1402</option>
-                            <option value="1403">1403</option>
-                            <option value="1404">1404</option>
-                            <option value="1405">1405</option>
-                            <option value="1406">1406</option>
-                            <option value="1407">1407</option>
-                            <option value="1408">1408</option>
-                            <option value="1409">1409</option>
-                    </select>
-                </span>
             </div>
         </div>
     </div>
@@ -293,11 +232,12 @@
 
 
     <div class="row justify-content-center">
-        <div class="col-sm-offset-9  col-md-5 col-lg-offset-5  border-dark text-center  " style="margin:5px 30px;" id="result">
+        <div class="col-sm-offset-9  col-md-5 col-lg-offset-5  border-dark text-center  " style="margin:25px 30px;"
+             id="result">
             &nbsp;
         </div>
     </div>
-    <div class="cp" > Milad Tavakoli
+    <div class="cp"> Milad Tavakoli
     </div>
 </div>
 
