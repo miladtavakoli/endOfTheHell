@@ -20,32 +20,65 @@ function eoth2() {
     startMiladiDate.setYear(startMiladi[0]);
     startMiladiDate.setHours(0, 0, 0);
 
+
+
     //get Description khedmat
-    var ezafe =0;
-    var kasri =0;
-    var ezafeInput =document.getElementById("ezafeKhedmat").value
-    var kasriInput =document.getElementById("kasriKhedmat").value
-    if(ezafeInput){ ezafe = parseInt(ezafeInput);}
-    if(kasriInput){ kasri = parseInt(kasriInput);}
+    var ezafe = 0;
+    var kasri = 0;
+    var ezafeInput = document.getElementById("ezafeKhedmat").value
+    var kasriInput = document.getElementById("kasriKhedmat").value
+    if (ezafeInput) ezafe = parseInt(ezafeInput);
+    if (kasriInput) kasri = parseInt(kasriInput);
 
-    var desc= parseInt(kasri-ezafe);
-
+    var desc = parseInt(kasri - ezafe);
+    var descDay = 0;
+    var descMonth = 0;
+    var descYear = 0;
     if (desc) {
-        var descDay, descMonth, descYear;
-        descDay = desc % 30;
-        descMonth = desc / 30;
-        console.log(descDay, "   ", descMonth.toFixed(0));
-        console.log(desc);
+        var absDesc = Math.abs(desc);
+        descYear = Math.floor(absDesc / 360);
+        descMonth = Math.floor(absDesc % 360 / 30);
+        descDay = Math.floor(absDesc % 360 % 30);
+        console.log(" روز ", descDay, " ماه ", descMonth, " سال  ", descYear);
+        // console.log(desc);
+        if (desc < 0) {
+            descDay *= -1;
+            descMonth *= -1;
+            descYear *= -1;
+        }
     }
+
+
+
     //calculate exit Day
-    var exitDay, exitMonth, exitYear;
-    exitDay = startDay;
-    exitMonth = startMonth + 9;
-    exitYear = startYear + 1;
-    if (exitMonth > 12) {
-        exitMonth -= 12;
-        exitYear++;
+    var exitDay = startDay;
+    var exitMonth = startMonth;
+    var exitYear = startYear;
+
+    exitDay = exitDay - descDay;
+    if (exitDay < 1) {
+        exitDay += 30;
+        exitMonth--;
     }
+    if (exitDay > 30) {
+        exitDay -= 30;
+        exitMonth++;
+    }
+
+    exitMonth = exitMonth - descMonth + 9;
+    if (exitMonth < 1) {
+        exitMonth += 12;
+        exitYear--;
+    }
+    if (exitMonth > 12) {
+        exitYear = Math.floor(exitYear + exitMonth / 12);
+        exitMonth = Math.floor(exitMonth % 12);
+        console.log(exitYear);
+    }
+
+    exitYear = exitYear - descYear + 1;
+
+    console.log(" روز ", exitDay, " ماه ", exitMonth, " سال  ", exitYear);
 
     var tarkhis = "  تاریخ ترخیص " + "   &emsp; :   &emsp;" + exitDay + " \\\ " + exitMonth + " \\\ " + exitYear + "<br>";
 
@@ -78,6 +111,7 @@ function eoth2() {
 
     var leftDays = date_diff_indays(startMiladiDate, nowDate);
     if (leftDays >= 0) {
+
         var leftWeeks = date_diff_inWeeks(startMiladiDate, nowDate);
         var leftMonths = date_diff_inMonths(startMiladiDate, nowDate);
         var leftHours = date_diff_inHours(startMiladiDate, nowDate);
@@ -118,7 +152,7 @@ function eoth2() {
             "پست دادن خسته‌ات کرده؟ توی واردکردن تاریخ دقت کن";
     }
 
-    console.log(ezafe, "_--_" , kasri, "_--_",exitMiladiDate);
+    // console.log(ezafe, "_--_", kasri, "_--_", exitMiladiDate, tarkhis);
 }
 
 
