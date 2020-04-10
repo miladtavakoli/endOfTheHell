@@ -4,11 +4,13 @@ function eoth2() {
     var nowDate = new Date();
     var exitMiladiDate = new Date();
     var startMiladiDate = new Date();
-    var tarkhis = "";
+    let tarkhis = "";
     var htmlRemainDays, htmlRemainWeeks, htmlRemainMonths, htmlRemainHours, htmlRemainMinutes, htmlRemainseconds = "";
     var htmlLeftDays, htmlLeftWeeks, htmlLeftMonths, htmlLeftHours, htmlLeftMinutes, htmlLeftseconds = "";
 
     var resultCss = document.getElementById('result').classList;
+    var resultCss_object = document.getElementById('result')
+    var resultErrorCss_object = document.getElementById('result_error')
 
     //get Start Date
     var startDay = parseInt(document.getElementById("startDay").value);
@@ -19,7 +21,6 @@ function eoth2() {
     startMiladiDate.setMonth(startMiladi[1] - 1);
     startMiladiDate.setYear(startMiladi[0]);
     startMiladiDate.setHours(0, 0, 0);
-
 
 
     //get Description khedmat
@@ -39,7 +40,7 @@ function eoth2() {
         descYear = Math.floor(absDesc / 360);
         descMonth = Math.floor(absDesc % 360 / 30);
         descDay = Math.floor(absDesc % 360 % 30);
-        console.log(" روز ", descDay, " ماه ", descMonth, " سال  ", descYear);
+        // console.log(" روز ", descDay, " ماه ", descMonth, " سال  ", descYear);
         // console.log(desc);
         if (desc < 0) {
             descDay *= -1;
@@ -47,7 +48,6 @@ function eoth2() {
             descYear *= -1;
         }
     }
-
 
 
     //calculate exit Day
@@ -73,14 +73,11 @@ function eoth2() {
     if (exitMonth > 12) {
         exitYear = Math.floor(exitYear + exitMonth / 12);
         exitMonth = Math.floor(exitMonth % 12);
-        console.log(exitYear);
     }
 
     exitYear = exitYear - descYear + 1;
 
-    console.log(" روز ", exitDay, " ماه ", exitMonth, " سال  ", exitYear);
-
-    var tarkhis = "  تاریخ ترخیص " + "   &emsp; :   &emsp;" + exitDay + " \\\ " + exitMonth + " \\\ " + exitYear + "<br>";
+    tarkhis = +exitDay + " \\\ " + exitMonth + " \\\ " + exitYear;
 
 
     exitMiladi = jalali_to_gregorian(exitYear, exitMonth, exitDay);
@@ -89,8 +86,6 @@ function eoth2() {
     exitMiladiDate.setYear(exitMiladi[0]);
     exitMiladiDate.setHours(0, 0, 0);
 
-    // console.log(exitMiladiDate, nowDate);
-    // console.log(exitMiladiDate - nowDate);
 
 
     var remainDays = date_diff_indays(nowDate, exitMiladiDate);
@@ -100,12 +95,7 @@ function eoth2() {
         var remainHours = date_diff_inHours(nowDate, exitMiladiDate);
         var remainMinutes = date_diff_inMinutes(nowDate, exitMiladiDate);
         var remainseconds = date_diff_inseconds(nowDate, exitMiladiDate);
-        htmlRemainDays = "<br>" + "  روز تا ترخیص" + "   &emsp; :   &emsp;" + remainDays;
-        htmlRemainWeeks = "<br>" + "  هفته تا ترخیص" + "   &emsp; :   &emsp;" + remainWeeks;
-        htmlRemainMonths = "<br>" + "  ماه تا ترخیص" + "   &emsp; :   &emsp;" + remainMonths;
-        htmlRemainHours = "<br>" + "  ساعت تا ترخیص" + "   &emsp; :   &emsp;" + remainHours;
-        htmlRemainMinutes = "<br>" + "  دقیقه تا ترخیص" + "   &emsp; :   &emsp;" + remainMinutes;
-        htmlRemainseconds = "<br>" + "  ثانیه تا ترخیص" + "   &emsp; :   &emsp;" + remainseconds;
+
     }
 
 
@@ -117,42 +107,41 @@ function eoth2() {
         var leftHours = date_diff_inHours(startMiladiDate, nowDate);
         var leftMinutes = date_diff_inMinutes(startMiladiDate, nowDate);
         var leftseconds = date_diff_inseconds(startMiladiDate, nowDate);
-        htmlLeftDays = "<br>" + "  روز گذشته از اعزام" + "   &emsp; :   &emsp;" + leftDays;
-        htmlLeftWeeks = "<br>" + "  هفته گذشته از اعزام" + "   &emsp; :   &emsp;" + leftWeeks;
-        htmlLeftMonths = "<br>" + "  ماه گذشته از اعزام" + "   &emsp; :   &emsp;" + leftMonths;
-        htmlLeftHours = "<br>" + "  ساعت گذشته از اعزام" + "   &emsp; :   &emsp;" + leftHours;
-        htmlLeftMinutes = "<br>" + "  دقیقه گذشته از اعزام" + "   &emsp; :   &emsp;" + leftMinutes;
-        htmlLeftseconds = "<br>" + "  ثانیه گذشته از اعزام" + "   &emsp; :   &emsp;" + leftseconds;
     }
+
+    // make table result var
+
 
     //print Result in result div
     if (leftDays >= 0 && remainDays >= 0) {
         //add css to Done Id
-        if (resultCss.contains("alert-warning")) {
-            resultCss.remove("alert-warning");
-        }
-        resultCss.add('alert-secondary', 'border');
-        document.getElementById("result").innerHTML =
-            tarkhis +
-            htmlLeftDays + htmlLeftWeeks + htmlLeftMonths + htmlLeftHours + htmlLeftMinutes + htmlLeftseconds +
+        resultCss_object.style.display = "block";
+        resultErrorCss_object.style.display = "none";
 
-            "<br>" + "<br>" +
+        document.getElementById("tarkhis_date").innerHTML = tarkhis;
+        document.getElementById("left_days").innerHTML = leftDays;
+        document.getElementById("left_weeks").innerHTML = leftWeeks;
+        document.getElementById("left_months").innerHTML = leftMonths;
+        document.getElementById("left_hours").innerHTML = leftHours;
+        document.getElementById("left_minutes").innerHTML = leftMinutes;
+        document.getElementById("left_seconds").innerHTML = leftseconds;
 
-            htmlRemainDays + htmlRemainWeeks + htmlRemainMonths + htmlRemainHours + htmlRemainMinutes + htmlRemainseconds;
+        document.getElementById("remain_days").innerHTML = remainDays;
+        document.getElementById("remain_weeks").innerHTML = remainWeeks;
+        document.getElementById("remain_months").innerHTML = remainMonths;
+        document.getElementById("remain_hours").innerHTML = remainHours;
+        document.getElementById("remain_minutes").innerHTML = remainMinutes;
+        document.getElementById("remain_seconds").innerHTML = remainseconds;
+
+
+    } else {
+        resultCss_object.style.display = "none";
+        resultErrorCss_object.style.display = "block";
+        // document.getElementById("result_error)").innerHTML =
+
 
     }
-    else {
-        //Add Css
-        //print in result div
-        if (resultCss.contains("alert-secondary")) {
-            resultCss.remove("alert-secondary");
-        }
-        resultCss.add('alert-warning', 'border');
-        document.getElementById("result").innerHTML =
-            "پست دادن خسته‌ات کرده؟ توی واردکردن تاریخ دقت کن";
-    }
 
-    // console.log(ezafe, "_--_", kasri, "_--_", exitMiladiDate, tarkhis);
 }
 
 
