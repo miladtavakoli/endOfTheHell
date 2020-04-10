@@ -5,8 +5,6 @@ function eoth2() {
     var exitMiladiDate = new Date();
     var startMiladiDate = new Date();
     let tarkhis = "";
-    var htmlRemainDays, htmlRemainWeeks, htmlRemainMonths, htmlRemainHours, htmlRemainMinutes, htmlRemainseconds = "";
-    var htmlLeftDays, htmlLeftWeeks, htmlLeftMonths, htmlLeftHours, htmlLeftMinutes, htmlLeftseconds = "";
 
     var resultCss = document.getElementById('result').classList;
     var resultCss_object = document.getElementById('result')
@@ -77,7 +75,7 @@ function eoth2() {
 
     exitYear = exitYear - descYear + 1;
 
-    tarkhis = +exitDay + " \\\ " + exitMonth + " \\\ " + exitYear;
+    tarkhis = +exitYear + " \\\ " + exitMonth + " \\\ " + exitDay;
 
 
     exitMiladi = jalali_to_gregorian(exitYear, exitMonth, exitDay);
