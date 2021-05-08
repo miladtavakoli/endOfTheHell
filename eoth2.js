@@ -87,6 +87,8 @@ function eoth2() {
 
     // make table result var
     //print Result in result div
+    
+
     if (leftDays >= 0 && remainDays >= 0 && isValid_lengthOfHell(lengthOfHell)) {
         //add css to Done Id
         resultCss_object.style.display = "block";
@@ -173,7 +175,7 @@ function calculate_ExitDates(startDay, startMonth, startYear,
     var exitYear = startYear;
     if (lengthOfHell == 21){
         tmp_m = 9
-        tmp_y = 0
+        tmp_y = 1
     }
     if (lengthOfHell == 24){
         tmp_m = 0
