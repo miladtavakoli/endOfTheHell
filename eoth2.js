@@ -6,11 +6,14 @@ function eoth2() {
     var startMiladiDate = new Date();
     let tarkhis = "";
 
-    var resultCss = document.getElementById('result').classList;
     var resultCss_object = document.getElementById('result')
     var resultErrorCss_object = document.getElementById('result_error')
+    
+    // get lengthOfHell 21 Or 24
+    var lengthOfHell = parseInt(document.getElementById("lengthOfHell").value);
 
-    //get Start Date
+
+    // get Start Date and convert to miladi
     var startDay = parseInt(document.getElementById("startDay").value);
     var startMonth = parseInt(document.getElementById("startMonth").value);
     var startYear = parseInt(document.getElementById("startYear").value);
@@ -21,7 +24,7 @@ function eoth2() {
     startMiladiDate.setHours(0, 0, 0);
 
 
-    //get Description khedmat
+    //get Description khedmat (ezafe & kasri)
     var ezafe = 0;
     var kasri = 0;
     var ezafeInput = document.getElementById("ezafeKhedmat").value
@@ -38,8 +41,6 @@ function eoth2() {
         descYear = Math.floor(absDesc / 360);
         descMonth = Math.floor(absDesc % 360 / 30);
         descDay = Math.floor(absDesc % 360 % 30);
-        // console.log(" روز ", descDay, " ماه ", descMonth, " سال  ", descYear);
-        // console.log(desc);
         if (desc < 0) {
             descDay *= -1;
             descMonth *= -1;
@@ -47,36 +48,11 @@ function eoth2() {
         }
     }
 
-
     //calculate exit Day
-    var exitDay = startDay;
-    var exitMonth = startMonth;
-    var exitYear = startYear;
-
-    exitDay = exitDay - descDay;
-    if (exitDay < 1) {
-        exitDay += 30;
-        exitMonth--;
-    }
-    if (exitDay > 30) {
-        exitDay -= 30;
-        exitMonth++;
-    }
-
-    exitMonth = exitMonth - descMonth + 9;
-    if (exitMonth < 1) {
-        exitMonth += 12;
-        exitYear--;
-    }
-    if (exitMonth > 12) {
-        exitYear = Math.floor(exitYear + exitMonth / 12);
-        exitMonth = Math.floor(exitMonth % 12);
-    }
-
-    exitYear = exitYear - descYear + 1;
-
-    tarkhis = +exitYear + " \\\ " + exitMonth + " \\\ " + exitDay;
-
+    let exitsObj = calculate_ExitDates(startDay, startMonth, startYear, descDay,descMonth, descYear, lengthOfHell)
+    var exitDay = exitsObj.exitDay;
+    var exitMonth = exitsObj.exitMonth;
+    var exitYear = exitsObj.exitYear;
 
     exitMiladi = jalali_to_gregorian(exitYear, exitMonth, exitDay);
     exitMiladiDate.setDate(exitMiladi[2]);
@@ -84,8 +60,11 @@ function eoth2() {
     exitMiladiDate.setYear(exitMiladi[0]);
     exitMiladiDate.setHours(0, 0, 0);
 
+    //
+    tarkhis = +exitYear + " \\\ " + exitMonth + " \\\ " + exitDay;
 
 
+    // 
     var remainDays = date_diff_indays(nowDate, exitMiladiDate);
     if (remainDays >= 0) {
         var remainWeeks = date_diff_inWeeks(nowDate, exitMiladiDate);
@@ -96,10 +75,9 @@ function eoth2() {
 
     }
 
-
+    // 
     var leftDays = date_diff_indays(startMiladiDate, nowDate);
     if (leftDays >= 0) {
-
         var leftWeeks = date_diff_inWeeks(startMiladiDate, nowDate);
         var leftMonths = date_diff_inMonths(startMiladiDate, nowDate);
         var leftHours = date_diff_inHours(startMiladiDate, nowDate);
@@ -108,10 +86,8 @@ function eoth2() {
     }
 
     // make table result var
-
-
     //print Result in result div
-    if (leftDays >= 0 && remainDays >= 0) {
+    if (leftDays >= 0 && remainDays >= 0 && isValid_lengthOfHell(lengthOfHell)) {
         //add css to Done Id
         resultCss_object.style.display = "block";
         resultErrorCss_object.style.display = "none";
@@ -135,8 +111,6 @@ function eoth2() {
     } else {
         resultCss_object.style.display = "none";
         resultErrorCss_object.style.display = "block";
-        // document.getElementById("result_error)").innerHTML =
-
 
     }
 
@@ -146,7 +120,6 @@ function eoth2() {
 var date_diff_indays = function (date1, date2) {
     dt1 = new Date(date1);
     dt2 = new Date(date2);
-    // return Math.floor((Date.UTC(dt2.getFullYear(), dt2.getMonth(), dt2.getDate()) - Date.UTC(dt1.getFullYear(), dt1.getMonth(), dt1.getDate()) ) / (1000 * 60 * 60 * 24));
     return ((dt2 - dt1) / (1000 * 60 * 60 * 24)).toFixed(1);
 
 };
@@ -173,7 +146,6 @@ var date_diff_inHours = function (date1, date2) {
 var date_diff_inMinutes = function (date1, date2) {
     dt1 = new Date(date1);
     dt2 = new Date(date2);
-    // return ((Date.UTC(dt2.getFullYear(), dt2.getMonth(), dt2.getDate()) - Date.UTC(dt1.getFullYear(), dt1.getMonth(), dt1.getDate()) ) / (1000 * 60 * 1 ));
     return ((dt2 - dt1) / (1000 * 60 * 1)).toFixed(0);
 
 };
@@ -181,7 +153,55 @@ var date_diff_inMinutes = function (date1, date2) {
 var date_diff_inseconds = function (date1, date2) {
     dt1 = new Date(date1);
     dt2 = new Date(date2);
-    // return ((Date.UTC(dt2.getFullYear(), dt2.getMonth(), dt2.getDate()) - Date.UTC(dt1.getFullYear(), dt1.getMonth(), dt1.getDate()) ) / (1000 * 60 * 1 ));
     return ((dt2 - dt1) / (1000)).toFixed(0);
 
 };
+
+var isValid_lengthOfHell = function (lengthOfHell){
+    if (lengthOfHell == 21 || lengthOfHell ==24){
+        return true
+    }
+    else{
+        return false
+    }
+}
+
+function calculate_ExitDates(startDay, startMonth, startYear,
+                            descDay,descMonth, descYear, lengthOfHell){
+    var exitDay = startDay;
+    var exitMonth = startMonth;
+    var exitYear = startYear;
+    if (lengthOfHell == 21){
+        tmp_m = 9
+        tmp_y = 0
+    }
+    if (lengthOfHell == 24){
+        tmp_m = 0
+        tmp_y = 2
+    }
+
+    exitDay = exitDay - descDay;
+    if (exitDay < 1) {
+        exitDay += 30;
+        exitMonth--;
+    }
+    if (exitDay > 30) {
+        exitDay -= 30;
+        exitMonth++;
+    }
+
+    exitMonth = exitMonth - descMonth + tmp_m;
+    if (exitMonth < 1) {
+        exitMonth += 12;
+        exitYear--;
+    }
+    if (exitMonth > 12) {
+        exitYear = Math.floor(exitYear + exitMonth / 12);
+        exitMonth = Math.floor(exitMonth % 12);
+    }
+
+    exitYear = exitYear - descYear + tmp_y;
+
+    return {exitDay, exitMonth, exitYear}
+
+}
