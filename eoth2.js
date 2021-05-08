@@ -201,9 +201,7 @@ function calculate_ExitDates(startDay, startMonth, startYear,
         exitYear = Math.floor(exitYear + exitMonth / 12);
         exitMonth = Math.floor(exitMonth % 12);
     }
-
     exitYear = exitYear - descYear + tmp_y;
-
     return {exitDay, exitMonth, exitYear}
 
 }
