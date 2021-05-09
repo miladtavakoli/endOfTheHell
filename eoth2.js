@@ -198,7 +198,6 @@ function calculate_ExitDates(startDay, startMonth, startYear,
         exitYear--;
     }
     if (exitMonth > 12) {
-        console.log("exitmonth>12 -->", exitMonth)
         exitYear = Math.floor(exitYear + exitMonth / 12);
         exitMonth = Math.floor(exitMonth % 12);
         if (exitMonth == 0){
